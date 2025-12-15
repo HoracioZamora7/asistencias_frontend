@@ -1,0 +1,22 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { AuthRoutingModule } from './auth-routing.module';
+import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared/shared.module';
+
+
+@NgModule({
+  declarations: [
+    AuthPageComponent
+  ],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule    
+  ]
+})
+export class AuthModule { }

@@ -1,0 +1,41 @@
+<h3>Inicia sesión</h3>
+
+<form [formGroup]="formLogin" (ngSubmit)="sendLogin()">
+
+  <!-- Correo -->
+  <label for="username">Dirección de correo</label>
+  <input
+    id="username"
+    name="username"
+    type="email"
+    formControlName="username"
+    placeholder="Dirección de correo"
+  >
+  <div [hidden]="username?.valid || username?.untouched">
+    Correo no válido
+  </div>
+<br>
+  <!-- Contraseña -->
+  <label for="password">Contraseña</label>
+  <input
+    id="password"
+    name="password"
+    type="password"
+    formControlName="password"
+    placeholder="Contraseña"
+  >
+  <div [hidden]="password?.valid || password?.untouched">
+    Contraseña no válida
+  </div>
+<br>
+  <!-- Error del servidor -->
+  <div *ngIf="errorSession" style="color: red;">
+    {{ errorMsg }}
+  </div>
+
+  <!-- Botón -->
+  <button type="submit" [disabled]="formLogin.invalid">
+    Iniciar sesión
+  </button>
+
+</form>
