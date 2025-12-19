@@ -1,0 +1,59 @@
+<form
+  [formGroup]="formJustificacion"
+  (ngSubmit)="sendJustificacion()">
+
+  <!-- Fecha -->
+  <label for="fecha">Fecha</label>
+  <input
+    id="fecha"
+    type="date"
+    formControlName="fecha">
+
+  <div
+    [hidden]="formJustificacion.get('fecha')?.valid 
+              || formJustificacion.get('fecha')?.untouched">
+    La fecha es obligatoria
+  </div>
+
+  <!-- Tipo -->
+  <label for="tipo">Tipo</label>
+  <select
+    id="tipo"
+    formControlName="tipo">
+    <option value="" disabled>Seleccione</option>
+    <option *ngFor="let t of tipoJustificaciones" [value]="t.id">
+      {{ t.nombre }}
+    </option>
+  </select>
+
+  <div
+    [hidden]="formJustificacion.get('tipo')?.valid 
+              || formJustificacion.get('tipo')?.untouched">
+    El tipo es obligatorio
+  </div>
+
+  <!-- Comentario -->
+  <label for="comentario">Comentario</label>
+  <textarea
+    id="comentario"
+    formControlName="comentario">
+  </textarea>
+
+  <div
+    [hidden]="!formJustificacion.get('comentario')?.hasError('maxlength')">
+    Máximo 200 caracteres
+  </div>
+
+  <!-- Error del servidor -->
+  <div *ngIf="errorSession" style="color: red;">
+    {{ errorMsg }}
+  </div>
+
+  <!-- Botón -->
+  <button
+    type="submit"
+    [disabled]="formJustificacion.invalid">
+    Enviar
+  </button>
+
+</form>

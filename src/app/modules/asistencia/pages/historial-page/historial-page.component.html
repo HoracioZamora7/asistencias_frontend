@@ -1,0 +1,134 @@
+<div class="page">
+
+  <div class="page-header">
+    <h1>Historial de Asistencias</h1>
+    <p>Consulte su registro de asistencias</p>
+  </div>
+
+  <form class="card filters" [formGroup]="formHistorial" (ngSubmit)="cargarHistorialAsistencias()">
+    <h2>Filtros</h2>
+
+    <div class="filters-row">
+      <div class="filter">
+        <label for="fechaInicio">Fecha inicial</label>
+        <input
+          id="fechaInicio"
+          type="date"
+          formControlName="fechaInicio"
+          [max]="maxfecha"
+        >
+
+        <div [hidden]="formHistorial.get('fechaInicio')?.valid || formHistorial.get('fechaInicio')?.untouched"
+          class="error" >
+          La fecha inicial es obligatoria
+        </div>
+      </div>
+      <div class="filter">
+        <label for="fechaFin">Fecha final</label>
+        <input
+          id="fechaFin"
+          type="date"
+          formControlName="fechaFin"
+          [max]="maxfecha"
+        >
+
+        <div [hidden]="formHistorial.get('fechaFin')?.valid || formHistorial.get('fechaFin')?.untouched"
+          class="error">
+          La fecha final es obligatoria
+        </div>
+
+        <!-- Error rango -->
+        <div *ngIf="!rangoFechasValidator(formHistorial.value.fechaInicio, formHistorial.value.fechaFin)" class="error">
+          El rango de fechas no es válido
+        </div>
+      </div>
+
+      
+
+    </div>
+
+    <button type="submit" [disabled]="formHistorial.invalid" >Buscar</button>
+  </form>
+
+  <!-- Tabla -->
+  <div class="card table-card">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora entrada</th>
+            <th>Hora salida</th>
+            <th>Estado</th>
+            <th>Justificada</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let a of historialAsistencias">
+            <td>{{ a.fecha }}</td>
+            <td>{{ a.horaEntrada ? (a.horaEntrada | date:'shortTime') : '-' }}</td>
+            <td>{{ a.horaSalida ? (a.horaSalida | date:'shortTime') : '-' }}</td>
+            
+            <td>
+              <span
+                class="status"
+                [ngClass]="{
+                  'tardanza': a.estado === 'Tardanza',
+                  'fuera': a.estado === 'Fuera de jornada',
+                  'ausente': a.estado === 'Ausente'
+                }"
+              >
+                {{ a.estado }}
+              </span>
+            </td>
+            <td>{{ a.mcaJustificada ? 'Sí' : '-' }}</td>
+          </tr>
+
+          <tr *ngIf="historialAsistencias.length === 0">
+            <td colspan="5">No hay historial disponible para el rango de fechas seleccionado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-card">
+      <p>Total registros</p>
+      <strong>{{ totalElements }}</strong>
+    </div>
+
+    <div class="summary-card">
+      <p>Asistencias puntuales</p>
+      <strong class="ok">N</strong>
+    </div>
+
+    <div class="summary-card">
+      <p>Tardanzas</p>
+      <strong class="warning">N</strong>
+    </div>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <button
+      (click)="page = page - 1; cargarHistorialAsistencias()"
+      [disabled]="primeraPag"
+    >
+      « Anterior
+    </button>
+
+    <span class="page-info">
+      Página {{ page + 1 }} de {{ totalPages }}
+    </span>
+
+    <button
+      (click)="page = page + 1; cargarHistorialAsistencias()"
+      [disabled]="ultimaPag"
+    >
+      Siguiente »
+    </button>
+  </div>
+
+</div>

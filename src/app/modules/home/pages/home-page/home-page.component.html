@@ -1,2 +1,62 @@
-<p>home-page works!</p>
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-left">
+      <div class="brand">
+        <div class="brand-icon">⏱</div>
+        <span class="brand-text">Sistema de Asistencias</span>
+      </div>
+
+      <div class="nav-links">
+        <a routerLink="asistencias"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-item">
+          <span class="icon">🕒</span>
+          <span>Asistencia</span>
+        </a>
+
+        <a routerLink="asistencias/historial"
+          routerLinkActive="active"
+          class="nav-item" >
+          <span class="icon">📅</span>
+          <span>Historial</span>
+        </a>
+
+        <a  routerLink="justificaciones"
+          routerLinkActive="active"        
+        class="nav-item">
+          <span class="icon">📄</span>
+          <span>Justificaciones</span>
+        </a>
+
+        <ng-container *ngIf="isAdmin">
+          <a  routerLink="justificaciones/admin"
+                    routerLinkActive="active"        
+                  class="nav-item">
+                    <span class="icon">📄</span>
+                    <span>Gestionar Justificaciones</span>
+                  </a>
+        </ng-container>
+        
+
+        <ng-container *ngIf="isAdmin">
+          <a  routerLink="dashboard"
+                    routerLinkActive="active"
+                  class="nav-item">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                  </a>
+        </ng-container>
+        
+       
+      </div>
+    </div>
+
+    <button class="logout-btn" (click)="logout();" routerLink="auth">
+      <span class="icon">🚪</span>
+      <span class="logout-text">Cerrar sesión</span>
+    </button>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>

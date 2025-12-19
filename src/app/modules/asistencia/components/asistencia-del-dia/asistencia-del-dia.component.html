@@ -1,1 +1,86 @@
-<p>asistencia-del-dia works!</p>
+<div class="attendance-page">
+  <div class="attendance-container">
+
+    <!-- Header -->
+    <div class="attendance-header">
+      <h1>Registro de Asistencia</h1>
+      <p>Registre su entrada o salida del día</p>
+    </div>
+
+    <!-- Card reloj -->
+    <div class="card clock-card">
+        <div class="clock-header">
+            <span class="icon clock"></span>
+            <h2>Hora del Sistema</h2>
+        </div>
+
+        <p class="clock-timezone">       
+            Lima, Perú
+        <br>
+        {{ (reloj$ | async)?.fecha | titlecase}} 
+        </p>
+
+        <div class="clock-circle">
+        
+            <div class="clock-time">
+                {{ (reloj$ | async)?.hora }}
+                <span class="clock-seconds">
+                    {{ (reloj$ | async)?.segundos }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Estado Actual -->
+    <div class="card status-card">
+      <div class="status-title">
+        <span class="icon clock"></span>
+        <h2>Estado Actual</h2>
+      </div>
+
+      <!-- Estado -->
+      <div class="status-info">
+        <span class="status-dot checkin"></span>
+        <span class="status-text">{{ (asistenciaDelDia$ | async)?.estado  }} </span>
+      </div>
+
+      <p class="last-action" *ngIf="(asistenciaDelDia$ | async) !== null">
+        Hora de entrada: {{ ((asistenciaDelDia$ | async)?.horaEntrada || null) |  date:'shortTime'  }} <br>
+        Hora de salida: {{ ((asistenciaDelDia$ | async)?.horaSalida || null) |  date:'shortTime'  }} <br>
+      </p>
+    </div>
+
+    <!-- Botones -->
+    <div class="actions">
+
+       <!-- Check-in -->
+       <div class="action-card" (click)="checkIn()" *ngIf="(asistenciaDelDia$ | async) === null">            
+            <div class="action-icon checkin">✓</div>
+            <h3>Check-in</h3>
+            <p>Registrar entrada</p>
+        </div>
+        
+        <!-- Check-out -->
+        <div class="action-card" (click)="checkOut()" *ngIf="(asistenciaDelDia$ | async)?.horaEntrada !== null && (asistenciaDelDia$ | async)?.horaSalida === '-'">
+            <div class="action-icon checkout">⏱</div>
+            <h3>Check-out</h3>
+            <p>Registrar salida</p>
+      </div>
+
+    </div>
+
+    <!-- QR -->
+    <div class="card qr-card">
+      <div class="qr-info">
+        <span class="icon qr"></span>
+        <div>
+          <h3>Registro con código QR</h3>
+          <p>Escanee el código QR en el punto de acceso</p>
+        </div>
+      </div>
+      <button class="qr-button">Escanear QR</button>
+    </div>
+
+  </div>
+</div>

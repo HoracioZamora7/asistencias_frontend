@@ -1,0 +1,298 @@
+/* Layout general */
+.attendance-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 32px 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.attendance-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.attendance-header {
+  margin-bottom: 32px;
+}
+
+.attendance-header h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.attendance-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Estado */
+.status-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.status-title h2 {
+  font-size: 18px;
+  color: #111827;
+  margin: 0;
+}
+
+.current-time {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.status-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.pending {
+  background-color: #9ca3af;
+}
+
+.status-dot.checkin {
+  background-color: #22c55e;
+}
+
+.status-dot.checkout {
+  background-color: #3b82f6;
+}
+
+.status-text {
+  color: #374151;
+}
+
+.last-action {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Acciones */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.action-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.action-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.action-icon.checkin {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.action-icon.checkout {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.action-card h3 {
+  margin: 0 0 4px;
+  color: #111827;
+}
+
+.action-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* QR */
+.qr-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.qr-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qr-card h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+
+.qr-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.qr-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qr-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* Nota */
+.note {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  color: #1e40af;
+}
+
+/* Iconos simples (placeholder visual) */
+.icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.icon.clock::before {
+  content: "🕒";
+}
+
+.icon.qr::before {
+  content: "🔲";
+}
+
+
+/*  */
+
+/* Clock Card */
+.clock-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clock-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.clock-timezone {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Reloj circular */
+/* Clock Card */
+.clock-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clock-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #111827;
+}
+
+.clock-timezone {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Reloj circular */
+.clock-circle {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 6px solid #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #eff6ff, #ffffff);
+}
+
+.clock-time {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #1e3a8a;
+  line-height: 1;
+}
+
+.clock-seconds {
+  display: block;
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+
+.action-card.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

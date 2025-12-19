@@ -9,9 +9,11 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { InjectSessionInterceptor } from '@core/interceptors/inject-session.interceptor';
 import { HttpErrorInterceptor } from '@core/interceptors/http-error.interceptor';
 import { GlobalErrorHandler } from '@shared/global/global-error-handler';
+import { RelojPipePipe } from './shared/pipes/reloj-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
+    RelojPipePipe,
   ],
   imports: [
     BrowserModule,

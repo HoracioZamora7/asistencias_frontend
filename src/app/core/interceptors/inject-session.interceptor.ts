@@ -14,8 +14,6 @@ export class InjectSessionInterceptor implements HttpInterceptor {
   constructor(private cookieService: CookieService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    //hacer lo q necesites con la request
-    /* console.log('Http req interceptado desde InjectSessionInterceptor!', request) */
     try {
       const token = this.cookieService.get('token');
       let newRequest = request;

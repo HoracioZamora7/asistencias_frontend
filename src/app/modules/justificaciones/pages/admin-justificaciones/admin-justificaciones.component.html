@@ -1,0 +1,108 @@
+<div class="page">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Justificaciones</h1>
+    <p>Gestión de solicitudes de justificación</p>
+  </div>
+
+  <!-- Filtro -->
+  <div class="card filters">
+  <h2>Filtros</h2>
+
+  <div class="filters-row">
+    <div class="filter">
+      <label>Estado</label>
+      <select
+        [(ngModel)]="id_estado"
+        (change)="page = 0; cargarJustificaciones()"
+      >
+        <option [value]="1">Pendiente</option>
+        <option [value]="2">Aprobado</option>
+        <option [value]="3">Rechazado</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Tabla -->
+  <div class="card table-card">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Empleado</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Comentario</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let j of listaJustificaciones">
+            <td>{{ j.nombreEmpleado }}</td>
+            <td>{{ j.tipo }}</td>
+            <td>{{ j.fecha | date:'dd/MM/yyyy' }}</td>
+            <td>{{ j.comentario }}</td>
+            <td>
+              <span
+                class="status"
+                [ngClass]="{
+                  'pendiente': j.estado === 'Pendiente',
+                  'aprobado': j.estado === 'Aprobado',
+                  'rechazado': j.estado === 'Rechazado'
+                }"
+              >
+                {{ j.estado }}
+              </span>
+            </td>
+
+            <td *ngIf="j.estado === 'Pendiente'">
+                <button (click)="aprobarJustificacion(j.id)">Aprobar</button>
+                <button (click)="rechazarJustificacion(j.id)">Rechazar</button>
+            </td>
+          </tr>
+
+          <!-- Sin datos -->
+          <tr *ngIf="listaJustificaciones.length === 0">
+            <td colspan="5">
+              No hay justificaciones para el estado seleccionado
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Resumen -->
+  <div class="summary">
+    <div class="summary-card">
+      <p>Total registros</p>
+      <strong>{{ totalElements }}</strong>
+    </div>
+  </div>
+
+  <!-- Paginación (MISMO patrón que historial) -->
+  <div class="pagination">
+    <button
+      (click)="page = page - 1; cargarJustificaciones()"
+      [disabled]="primeraPag"
+    >
+      « Anterior
+    </button>
+
+    <span class="page-info">
+      Página {{ page + 1 }} de {{ totalPages }}
+    </span>
+
+    <button
+      (click)="page = page + 1; cargarJustificaciones()"
+      [disabled]="ultimaPag"
+    >
+      Siguiente »
+    </button>
+  </div>
+
+</div>
